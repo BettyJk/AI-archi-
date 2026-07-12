@@ -1,0 +1,66 @@
+site_name: Packaging Analysis Platform — Peugeot 3008
+site_description: AI-assisted automotive packaging clearance analysis (space-weaver + MG2 NOK Correction System)
+site_author: MG2 Engineering
+
+repo_url: https://github.com/BettyJk/AI-archi-
+repo_name: BettyJk/AI-archi-
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.sections
+    - toc.integrate
+    - content.code.copy
+    - search.highlight
+    - search.suggest
+
+docs_dir: docs
+
+nav:
+  - Home: index.md
+  - Architecture: ARCHITECTURE.md
+  - Setup & Run: SETUP_AND_RUN.md
+  - API Reference: API_REFERENCE.md
+  - Frontend: FRONTEND.md
+  - Data & Preprocessing: DATA_AND_PREPROCESSING.md
+  - Clearance Rules: CLEARANCE_RULES.md
+  - Troubleshooting: TROUBLESHOOTING.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - tables
+  - toc:
+      permalink: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search

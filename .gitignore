@@ -1,0 +1,58 @@
+# ─────────────────────────────────────────────────────────────
+# SECRETS — never commit. Both .env files contain live API keys.
+# ─────────────────────────────────────────────────────────────
+.env
+*.env
+!*.env.example
+
+# ─────────────────────────────────────────────────────────────
+# Python
+# ─────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+# Virtual environments
+venv_mg2/
+venv2/
+venv/
+.venv/
+peugeot_preprocessor2/venv2/
+MG2_NOK_Correction_System_fixed/venv_mg2/
+
+# ─────────────────────────────────────────────────────────────
+# Node / frontend
+# ─────────────────────────────────────────────────────────────
+node_modules/
+dist/
+.tanstack/
+.wrangler/
+*.log
+
+# ─────────────────────────────────────────────────────────────
+# Generated docs site
+# ─────────────────────────────────────────────────────────────
+site/
+
+# ─────────────────────────────────────────────────────────────
+# Large binary data / generated artifacts
+# (STL meshes and generated reports bloat the repo; keep them out
+#  of the docs repo. Remove these lines if you want to version data.)
+# ─────────────────────────────────────────────────────────────
+*.stl
+*.STL
+output/*.html
+output/*.json
+MG2_NOK_Correction_System_fixed/output/
+MG2_NOK_Correction_System_fixed/image_cache/
+peugeot_preprocessor2/history/
+peugeot_preprocessor2/stl_files/**/output/
+
+# ─────────────────────────────────────────────────────────────
+# OS / editor
+# ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
