@@ -129,6 +129,7 @@ Then open **http://localhost:5173/**.
 
 | Document | What's inside |
 |----------|---------------|
+| [docs/PROJECT_REPORT.md](docs/PROJECT_REPORT.md) | The project explained in detail + the rationale for every technology choice |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Full system architecture, data flow, the two backends, AI providers |
 | [docs/SETUP_AND_RUN.md](docs/SETUP_AND_RUN.md) | Prerequisites, install, environment variables, running all services, verification |
 | [docs/API_REFERENCE.md](docs/API_REFERENCE.md) | Every endpoint of the backend (8000) and MG2 (8001), with request/response shapes |

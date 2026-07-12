@@ -36,6 +36,7 @@ docs_dir: docs
 
 nav:
   - Home: index.md
+  - Project Report & Rationale: PROJECT_REPORT.md
   - Architecture: ARCHITECTURE.md
   - Setup & Run: SETUP_AND_RUN.md
   - API Reference: API_REFERENCE.md

@@ -74,6 +74,7 @@ Then open **http://localhost:5173/**.
 
 | Page | Contents |
 |------|----------|
+| [Project Report & Rationale](PROJECT_REPORT.md) | The project explained + why each technology was chosen over the alternatives |
 | [Architecture](ARCHITECTURE.md) | System architecture, data flow, the two backends, AI providers |
 | [Setup & Run](SETUP_AND_RUN.md) | Prerequisites, install, env vars, running all services, verification |
 | [API Reference](API_REFERENCE.md) | Every endpoint of the backend (8000) and MG2 (8001) |
