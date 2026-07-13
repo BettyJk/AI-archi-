@@ -1,7 +1,7 @@
-# Packaging Analysis Platform — Peugeot 3008
+# Packaging Analysis Platform 
 
 An AI-assisted **automotive packaging clearance analysis** platform. It automates what the
-Stellantis / PSA *Synthèse Implantation* team traditionally does by hand in CATIA: measuring
+MG2 engineering  *Analyse d'implantation* team traditionally does by hand in CATIA: measuring
 3D gaps between vehicle parts, checking them against packaging clearance rules, and proposing
 corrective actions for violations.
 
