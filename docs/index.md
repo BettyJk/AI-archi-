@@ -1,7 +1,7 @@
-# Packaging Analysis Platform 
+# Packaging Analysis Platform
 
 An AI-assisted **automotive packaging clearance analysis** platform. It automates what the
-MG2 engineering  *Analyse d'implantation* team traditionally does by hand in CATIA: measuring
+MG2 engineering *Analyse d'implantation* team traditionally does by hand in CATIA: measuring
 3D gaps between vehicle parts, checking them against packaging clearance rules, and proposing
 corrective actions for violations.
 
@@ -14,6 +14,10 @@ The platform lets an engineer:
 5. Run **AI analysis** on a clearance result to get a verdict (`OK / WARNING / NOK / CLASH`),
    a plain-language explanation, and concrete **corrective scenarios**.
 6. Generate **HTML engineering reports**.
+
+![The 3D environment viewer with a study part and its neighbours](demo5.png)
+
+_See the full [visual walkthrough](DEMO.md) for every step of the workflow._
 
 ## System at a glance
 
@@ -40,17 +44,17 @@ peugeot_preprocessor2/            Capgemini Generative Engine / Anthropic / Asse
 ## Quick start (Windows)
 
 ```powershell
-# Terminal 1 — Main backend (port 8000)
+# Terminal 1 - Main backend (port 8000)
 cd "space-weaver-main"
 $env:BACKEND_HOST="127.0.0.1"; $env:BACKEND_PORT="8000"
 python backend.py
 
-# Terminal 2 — MG2 AI server (port 8001)
+# Terminal 2 - MG2 AI server (port 8001)
 cd "MG2_NOK_Correction_System_fixed"
 venv_mg2\Scripts\activate
 python mg2_api_server.py
 
-# Terminal 3 — Frontend (port 5173)
+# Terminal 3 - Frontend (port 5173)
 cd "space-weaver-main"
 npm install          # first time only
 npm run dev -- --port 5173 --strictPort

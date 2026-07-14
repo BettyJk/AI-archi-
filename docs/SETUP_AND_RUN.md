@@ -17,8 +17,8 @@ global interpreter and in `MG2_NOK_Correction_System_fixed/venv_mg2`.
 
 ### Virtual environments present
 
-- `MG2_NOK_Correction_System_fixed/venv_mg2` — the MG2 server's venv (working).
-- `peugeot_preprocessor2/venv2` — **broken** (its `pyvenv.cfg` points to a nonexistent
+- `MG2_NOK_Correction_System_fixed/venv_mg2` - the MG2 server's venv (working).
+- `peugeot_preprocessor2/venv2` - **broken** (its `pyvenv.cfg` points to a nonexistent
   `C:\Program Files\Python311`). Use the global Python for the preprocessor CLIs, or recreate it.
 
 ## 2. Install
@@ -69,7 +69,7 @@ AI_API=anthropic                    # default provider for /analyze-file (not th
 LLM_OPENAI_KEY=...                  # Capgemini Generative Engine key for Ai analyst.py
 ```
 
-### Backend (`backend.py`) — no `.env`, only process env vars
+### Backend (`backend.py`) - no `.env`, only process env vars
 
 ```env
 BACKEND_HOST=0.0.0.0   # default
@@ -86,7 +86,7 @@ MG2_PORT=8001
 
 Open three terminals (or run each in the background).
 
-### Terminal 1 — Main backend (port 8000)
+### Terminal 1 - Main backend (port 8000)
 
 ```powershell
 cd "space-weaver-main"
@@ -97,7 +97,7 @@ python backend.py
 Expect: `Uvicorn running on http://127.0.0.1:8000` and lines like
 `Auto-loaded predefined zone: Electrical_Suspension (229 parts)`.
 
-### Terminal 2 — MG2 AI server (port 8001)
+### Terminal 2 - MG2 AI server (port 8001)
 
 ```powershell
 cd "MG2_NOK_Correction_System_fixed"
@@ -108,7 +108,7 @@ python mg2_api_server.py
 
 Expect: `Uvicorn running on http://127.0.0.1:8001`.
 
-### Terminal 3 — Frontend (port 5173)
+### Terminal 3 - Frontend (port 5173)
 
 ```powershell
 cd "space-weaver-main"
@@ -134,7 +134,7 @@ Invoke-WebRequest http://127.0.0.1:8001/health -UseBasicParsing | Select -Expand
 # Real zones loaded (should list 7 zones with part counts)
 Invoke-WebRequest http://127.0.0.1:8000/zones -UseBasicParsing | Select -Expand Content
 
-# Frontend serving the app (title should be "Packaging Analysis — MG2 Engineering")
+# Frontend serving the app (title should be "Packaging Analysis - MG2 Engineering")
 Invoke-WebRequest http://localhost:5173/ -UseBasicParsing | Select -Expand Content
 
 # Confirm which process owns each port
@@ -155,7 +155,7 @@ cd "peugeot_preprocessor2"
 python "stl_files\peugeot_preprocessor\preprocess.py"
 
 # Compute clearance for a single STL (writes analysis_<name>.json)
-python engine.py --stl "stl_files\Peugeot 3008(Electrical + Suspension)\<part>.stl"
+python engine.py --stl "stl_files\<zone folder>\<part>.stl"
 
 # LLM analysis of an engine output file (writes ai_report_<name>.json)
 python "Ai analyst.py" --analysis analysis_<part>.json
@@ -164,6 +164,6 @@ python "Ai analyst.py" --analysis analysis_<part>.json
 ## 7. Stopping / restarting
 
 - Ctrl+C in each terminal, or stop the background tasks.
-- Zones added at runtime via the UI's "custom zone" loader are **not persisted** — only the 7
+- Zones added at runtime via the UI's "custom zone" loader are **not persisted** - only the 7
   predefined zones reload automatically on backend restart.
 </content>

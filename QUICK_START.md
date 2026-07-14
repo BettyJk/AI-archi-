@@ -1,4 +1,4 @@
-# Integration Complete — Quick Start Guide
+# Integration Complete - Quick Start Guide
 
 ## What Was Integrated
 
@@ -12,17 +12,17 @@ The **MG2 NOK Correction System** has been successfully integrated into the **sp
 ## Files Modified/Created
 
 ### New Files
-- `MG2_NOK_Correction_System_fixed/mg2_api_server.py` — FastAPI server wrapper
-- `INTEGRATION_GUIDE.md` — Comprehensive integration documentation
-- `setup_integration.sh` — Linux/macOS setup script
-- `setup_integration.bat` — Windows setup script
-- `QUICK_START.md` — This file
+- `MG2_NOK_Correction_System_fixed/mg2_api_server.py` - FastAPI server wrapper
+- `INTEGRATION_GUIDE.md` - Comprehensive integration documentation
+- `setup_integration.sh` - Linux/macOS setup script
+- `setup_integration.bat` - Windows setup script
+- `QUICK_START.md` - This file
 
 ### Modified Files
-- `space-weaver-main/src/lib/api.ts` — Added MG2 API functions
-- `space-weaver-main/src/components/ClearanceTable.tsx` — Added "Analyze" button
-- `space-weaver-main/src/routes/index.tsx` — Added analysis handler
-- `MG2_NOK_Correction_System_fixed/requirements.txt` — Added FastAPI dependencies
+- `space-weaver-main/src/lib/api.ts` - Added MG2 API functions
+- `space-weaver-main/src/components/ClearanceTable.tsx` - Added "Analyze" button
+- `space-weaver-main/src/routes/index.tsx` - Added analysis handler
+- `MG2_NOK_Correction_System_fixed/requirements.txt` - Added FastAPI dependencies
 
 ## Quick Start (5 Minutes)
 
@@ -68,7 +68,7 @@ npm run dev
 ## Using the AI Analysis Feature
 
 1. **Load a Zone**
-   - Select a zone (e.g., "Peugeot 3008 [...]")
+   - Select a zone
 
 2. **Set Study Part & Neighbours**
    - Click on a part (study part)
@@ -119,12 +119,12 @@ MG2_PORT=8002 python mg2_api_server.py
 
 ## Features
 
-✅ **Capture from 3D Viewer** — Multi-view AI composite (2400×1600)
-✅ **Real-time Analysis** — Send images directly to MG2
-✅ **Verdict Classification** — CLASH, NOK, WARNING, OK
-✅ **AI-Powered** — Uses Anthropic Claude for analysis
-✅ **Batch Support** — API ready for batch analysis (coming soon)
-✅ **Report Generation** — HTML reports (coming soon)
+✅ **Capture from 3D Viewer** - Multi-view AI composite (2400×1600)
+✅ **Real-time Analysis** - Send images directly to MG2
+✅ **Verdict Classification** - CLASH, NOK, WARNING, OK
+✅ **AI-Powered** - Uses Anthropic Claude for analysis
+✅ **Batch Support** - API ready for batch analysis (coming soon)
+✅ **Report Generation** - HTML reports (coming soon)
 
 ## Architecture
 

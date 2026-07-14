@@ -1,8 +1,8 @@
 # Clearance Rules Reference
 
 The packaging clearance rules used to classify a measured gap into
-`OK / WARNING / NOK (VIOLATION) / CLASH (COLLISION)`. Based on the Stellantis / PSA
-*Synthèse Implantation* "CCP Routing" standard (ref. IFIM_SV_IMN_0070) for the Peugeot 3008.
+`OK / WARNING / NOK (VIOLATION) / CLASH (COLLISION)`. Based on the automotive packaging
+"CCP Routing" clearance standard (ref. IFIM_SV_IMN_0070).
 
 > **Where the rules actually live.** There is a human-readable reference spec at
 > `peugeot_preprocessor2/packaging_rules.json`, but
@@ -26,7 +26,7 @@ Given a measured clearance `x` and a required minimum `min`:
 For **Connected** parts (attached by design): `|x| < 0.01` → OK, `x < 0` → CLASH, else NOK.
 Missing gap → **UNKNOWN**.
 
-## 2. Structural clearance rules (SCR) — by part motion
+## 2. Structural clearance rules (SCR) - by part motion
 
 Selected when explicit part types are provided (Fixed / Moving / Connected):
 
@@ -42,7 +42,7 @@ Selected when explicit part types are provided (Fixed / Moving / Connected):
 These match the frontend's `getRowEvaluation` limits (Fixed/Fixed 5, Moving/Moving 15, mixed 10,
 Connected 0).
 
-## 3. CCP circuit routing rules — by circuit type
+## 3. CCP circuit routing rules - by circuit type
 
 Applied when a part is a routed circuit (fuel line, harness, etc.). The governing minimum is the
 **highest** triggered value among base + special conditions.
@@ -95,6 +95,6 @@ being automated (manual CATIA gap measurement, Excel/PowerPoint reporting, manua
 cross-referencing).
 
 > **Consistency note.** The reference spec uses COLLISION/VIOLATION/WARNING/OK; the code uses
-> CLASH/NOK/WARNING/OK. They map 1:1 as in §1. Keep both in sync manually — the JSON is not loaded
+> CLASH/NOK/WARNING/OK. They map 1:1 as in §1. Keep both in sync manually - the JSON is not loaded
 > at runtime.
 </content>

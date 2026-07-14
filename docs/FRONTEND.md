@@ -1,6 +1,6 @@
 # Frontend
 
-The frontend lives in `space-weaver-main/` — a **React 19 + TanStack Start
+The frontend lives in `space-weaver-main/` - a **React 19 + TanStack Start
 (SSR-capable) + TanStack Router + Vite + Three.js** single-page tool for automotive packaging
 clearance analysis. `package.json` name: `tanstack_start_ts`.
 
@@ -8,7 +8,7 @@ clearance analysis. `package.json` name: `tanstack_start_ts`.
 
 - **React 19**, **TanStack Start** (`@tanstack/react-start`) + **TanStack Router** (file-based
   routes in `src/routes/`, generated `routeTree.gen.ts`).
-- **Vite 7** via the bundled config plugin `@lovable.dev/vite-tanstack-config` — it already
+- **Vite 7** via the bundled config plugin `@lovable.dev/vite-tanstack-config` - it already
   includes `tanstackStart`, `viteReact`, `tailwindcss`, `tsConfigPaths`, Cloudflare (build-only),
   the dev `componentTagger`, the `@` alias, and **port/host/strictPort** handling. Do **not** add
   those plugins manually.
@@ -68,7 +68,7 @@ src/
     mg2-logo-placeholder.png
 ```
 
-State management is entirely local `useState`/`useMemo`/`useRef` inside `Index` — no Redux/Zustand;
+State management is entirely local `useState`/`useMemo`/`useRef` inside `Index` - no Redux/Zustand;
 `@tanstack/react-query` is a dependency but not used.
 
 ## 4. The main page (`routes/index.tsx`)
@@ -135,14 +135,18 @@ A `forwardRef` component exposing `Viewer3DHandle` (`captureSegmentAI`, `isReady
   Clicking a table row highlights its segment and dims the rest.
 - **Toolbar:** reset, plan views (XY/YZ/XZ), ±90° rotations, grid toggle, screenshot-to-clipboard, close.
 
-### `captureSegmentAI(name, width=2400, height=1600)` — the AI composite
+### `captureSegmentAI(name, width=2400, height=1600)` - the AI composite
 
 Isolates study + one neighbour, then builds a **4-panel 2400×1600 canvas** (header ~7% + 2×2 panels
 + footer ~7%): (1) view ⊥ to the gap/penetration axis, (2) lateral ⊥ view, (3) along-axis
-cross-section, (4) context view in the user's orientation. Panels 1–2 project `point_a`/`point_b`
+cross-section, (4) context view in the user's orientation. Panels 1-2 project `point_a`/`point_b`
 to 2D and draw a **green CAD dimension line** with arrowheads + a "Distance minimale ~X.Xmm" (or
 "Pénétr. ~X.Xmm") label. Header shows part names + mm value (or a red INTERFERENCE banner); footer
 shows world coords + direction. Returns a PNG data URL; visibility is restored in `finally`.
+
+The resulting composite that is sent to the vision model looks like this:
+
+![The 2400x1600 multi-view composite image sent to the vision LLM](image_sent_to_llm.png)
 
 ## 7. The clearance table (`components/ClearanceTable.tsx`)
 

@@ -1,4 +1,4 @@
-# MG2 Integration — Completion Summary
+# MG2 Integration - Completion Summary
 
 ## Overview
 
@@ -16,10 +16,10 @@ A new REST API server that wraps the MG2 pipeline:
 - Returns structured analysis results with verdicts
 
 **Endpoints:**
-- `POST /analyze` — Single image analysis
-- `POST /analyze-batch` — Multiple images
-- `POST /analyze-file` — File upload
-- `GET /health` — Health check
+- `POST /analyze` - Single image analysis
+- `POST /analyze-batch` - Multiple images
+- `POST /analyze-file` - File upload
+- `GET /health` - Health check
 
 **Port:** 8001
 
@@ -31,10 +31,10 @@ Updated React components to support AI analysis:
 - Added analysis handler and state management
 
 ### 3. Documentation & Setup
-- **INTEGRATION_GUIDE.md** — Complete integration guide (1000+ lines)
-- **QUICK_START.md** — Quick reference guide
-- **setup_integration.sh** — Linux/macOS setup script
-- **setup_integration.bat** — Windows setup script
+- **INTEGRATION_GUIDE.md** - Complete integration guide (1000+ lines)
+- **QUICK_START.md** - Quick reference guide
+- **setup_integration.sh** - Linux/macOS setup script
+- **setup_integration.bat** - Windows setup script
 
 ## Architecture Diagram
 
@@ -107,13 +107,13 @@ MG2_NOK_Correction_System_fixed/
 
 ## Key Features Implemented
 
-✅ **Image Capture** — Multi-view AI composite from 3D viewer
-✅ **Real-time Analysis** — Send images to MG2 for immediate classification
-✅ **Verdict Classification** — CLASH, NOK, WARNING, OK
-✅ **AI Integration** — Anthropic Claude for detailed analysis
-✅ **Error Handling** — User-friendly error messages and toasts
-✅ **Async Operations** — Non-blocking UI during analysis
-✅ **API Ready** — Batch analysis support built-in
+✅ **Image Capture** - Multi-view AI composite from 3D viewer
+✅ **Real-time Analysis** - Send images to MG2 for immediate classification
+✅ **Verdict Classification** - CLASH, NOK, WARNING, OK
+✅ **AI Integration** - Anthropic Claude for detailed analysis
+✅ **Error Handling** - User-friendly error messages and toasts
+✅ **Async Operations** - Non-blocking UI during analysis
+✅ **API Ready** - Batch analysis support built-in
 
 ## Installation Instructions
 
@@ -160,7 +160,7 @@ python MG2_NOK_Correction_System_fixed/mg2_api_server.py
 Expected output:
 ```
 ╔══════════════════════════════════════════════════════════════════╗
-║   MG2 NOK Correction System — FastAPI Server                   ║
+║   MG2 NOK Correction System - FastAPI Server                   ║
 ║   Starting on 0.0.0.0:8001                                      ║
 ╚══════════════════════════════════════════════════════════════════╝
 
@@ -180,12 +180,12 @@ http://localhost:5173
 
 ## Usage Workflow
 
-1. **Load a Zone** — Select a packaging zone
-2. **Select Parts** — Choose study part and neighbours
-3. **Open Viewer** — Click "3D-ENV" button
-4. **Compute Clearance** — Click "CC" button
-5. **Run AI Analysis** — Click "Analyze" button on each result
-6. **View Results** — See verdict and analysis details
+1. **Load a Zone** - Select a packaging zone
+2. **Select Parts** - Choose study part and neighbours
+3. **Open Viewer** - Click "3D-ENV" button
+4. **Compute Clearance** - Click "CC" button
+5. **Run AI Analysis** - Click "Analyze" button on each result
+6. **View Results** - See verdict and analysis details
 
 ## API Examples
 
@@ -257,12 +257,12 @@ AI_API=anthropic
 
 Possible improvements for future releases:
 
-1. **Result Persistence** — Store analysis results in database
-2. **Report Generation** — Generate PDF/HTML reports
-3. **Batch Processing** — Process multiple images in queue
-4. **Caching** — Cache results to avoid re-processing
-5. **Advanced UI** — Show detailed findings in modal
-6. **Export** — Export results as CSV/JSON
+1. **Result Persistence** - Store analysis results in database
+2. **Report Generation** - Generate PDF/HTML reports
+3. **Batch Processing** - Process multiple images in queue
+4. **Caching** - Cache results to avoid re-processing
+5. **Advanced UI** - Show detailed findings in modal
+6. **Export** - Export results as CSV/JSON
 
 ## Quality Assurance
 
@@ -275,8 +275,8 @@ Possible improvements for future releases:
 ## Support & Resources
 
 **Documentation:**
-- `INTEGRATION_GUIDE.md` — Comprehensive guide (1000+ lines)
-- `QUICK_START.md` — Quick reference
+- `INTEGRATION_GUIDE.md` - Comprehensive guide (1000+ lines)
+- `QUICK_START.md` - Quick reference
 - API Reference section in INTEGRATION_GUIDE.md
 
 **Troubleshooting:**
@@ -314,11 +314,11 @@ curl http://localhost:8001/health
 
 ## Next Steps
 
-1. **Configure API Keys** — Add ANTHROPIC_API_KEY to .env
-2. **Run Setup Script** — Execute setup_integration.sh/bat
-3. **Start Services** — Run MG2 server and space-weaver
-4. **Test Workflow** — Follow usage workflow above
-5. **Analyze Results** — Click "Analyze" on clearance rows
+1. **Configure API Keys** - Add ANTHROPIC_API_KEY to .env
+2. **Run Setup Script** - Execute setup_integration.sh/bat
+3. **Start Services** - Run MG2 server and space-weaver
+4. **Test Workflow** - Follow usage workflow above
+5. **Analyze Results** - Click "Analyze" on clearance rows
 
 ---
 

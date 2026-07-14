@@ -1,7 +1,7 @@
 # Data & Preprocessing
 
 How vehicle CAD data becomes the zone files the app consumes, the exact schemas, the clearance
-algorithm, and — importantly — **what data is actually present on disk**.
+algorithm, and - importantly - **what data is actually present on disk**.
 
 ## 1. The data pipeline
 
@@ -28,8 +28,8 @@ Each `data/<Zone>.json` is a JSON **array of part objects**:
 ```json
 {
   "part_name":    "IB_6-4122-1114_Plugs_Support",
-  "folder_key":   "Peugeot 3008 [Accessories + Seat]",
-  "folder_label": "Peugeot 3008 [Accessories + Seat]",
+  "folder_key":   "[Accessories + Seat]",
+  "folder_label": "[Accessories + Seat]",
   "file_path":    "C:\\...\\IB_6-4122-1114_Plugs_Support.stl",
   "bounding_box": { "min": [x, y, z], "max": [x, y, z] },
   "centroid":     [x, y, z],
@@ -46,7 +46,7 @@ and `folder_key` into each part at load time.
 
 ## 3. Zones on disk
 
-**`peugeot_preprocessor2/data/` — 7 zone files, ~1,709 parts total:**
+**`peugeot_preprocessor2/data/` - 7 zone files, ~1,709 parts total:**
 
 | Zone JSON | Parts |
 |-----------|-------|
@@ -58,21 +58,21 @@ and `folder_key` into each part at load time.
 | `Accessories_Seat.json` | 158 |
 | `Pedals_Safety_Steering.json` | 102 |
 
-**`peugeot_preprocessor2/stl_files/` — 8 zone subfolders + the nested preprocessor.**
+**`peugeot_preprocessor2/stl_files/` - 8 zone subfolders + the nested preprocessor.**
 
 ## 4. Data availability
 
 > **Only one zone has STL meshes on disk.**
 >
-> | STL folder | Meshes |
+> | STL folder (zone) | Meshes |
 > |------------|--------|
-> | `Peugeot 3008(Electrical + Suspension)` | **229 `.stl` + `hierarchy.json`** ✅ |
-> | `Peugeot 3008 [Accessories + Seat]` | empty |
-> | `Peugeot 3008 [Air conditioning + Heating + Brakes Mechanism]` | empty |
-> | `IB - Peugeot 3008 [BODY 2]` | empty |
-> | `IB - Peugeot 3008 [Body 3]` | empty |
-> | `Peugeot 3008 [Interior]` | empty |
-> | `Peugeot 3008 [Pedals + Safty +Steering]` | empty |
+> | `Electrical + Suspension` | **229 `.stl` + `hierarchy.json`** |
+> | `Accessories + Seat` | empty |
+> | `Air conditioning + Heating + Brakes Mechanism` | empty |
+> | `Body 2` | empty |
+> | `Body 3` | empty |
+> | `Interior` | empty |
+> | `Pedals + Safety + Steering` | empty |
 
 Consequences:
 - **Zone/part lists work for all 7 zones** (they come from the JSON metadata).
@@ -81,7 +81,7 @@ Consequences:
   `NO_STL` and the viewer has nothing to load.
 
 To enable the other zones, place their `.stl` files into the matching STL subfolders (filenames
-must equal `part_name` + `.stl`) — or regenerate with the preprocessor if you have the CAD exports.
+must equal `part_name` + `.stl`) - or regenerate with the preprocessor if you have the CAD exports.
 
 ## 5. The clearance engine
 
@@ -119,7 +119,7 @@ cd "peugeot_preprocessor2"
 python "stl_files\peugeot_preprocessor\preprocess.py"
 
 # Compute clearance for one part
-python engine.py --stl "stl_files\Peugeot 3008(Electrical + Suspension)\<part>.stl" \
+python engine.py --stl "stl_files\<zone folder>\<part>.stl" \
                  --per 10 --min_dis 20 --max_dis 150
 
 # LLM analysis of an engine output (writes ai_report_<part>.json)
@@ -127,7 +127,7 @@ python "Ai analyst.py" --analysis analysis_<part>.json
 ```
 
 - `Ai analyst.py` uses the **Capgemini Generative Engine** (OpenAI SDK, `openai.gpt-4o`,
-  key `LLM_OPENAI_KEY`) — despite the function being named `call_claude`.
+  key `LLM_OPENAI_KEY`) - despite the function being named `call_claude`.
 - The legacy `main.py` backend's `call_claude_ai` uses **Anthropic** (`claude-sonnet-4-20250514`,
   `ANTHROPIC_API_KEY`).
 

@@ -1,4 +1,4 @@
-# Packaging Analysis Platform  (MG2 Engineering)
+# Packaging Analysis Platform (MG2 Engineering)
 
 An AI-assisted **automotive packaging clearance analysis** platform. It automates what the
 MG2 *Analyse d'implantation* team traditionally does by hand in CATIA: measuring
@@ -22,7 +22,7 @@ The platform lets an engineer:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  Frontend — space-weaver  (React 19 + TanStack Start + Three.js + Vite)    │
+│  Frontend - space-weaver  (React 19 + TanStack Start + Three.js + Vite)    │
 │  Zone/part selection · neighbour detection · 3D viewer · clearance table   │
 │  DEV PORT: 5173  (see note on 8080 below)                                  │
 └───────────────┬──────────────────────────────────┬───────────────────────┘
@@ -62,7 +62,7 @@ The platform lets an engineer:
 > **Note on the two Python backends.** The *integrated* application uses
 > `space-weaver-main/backend.py` (port 8000) as its data/clearance backend.
 > `peugeot_preprocessor2/main.py` is a **separate, earlier standalone FastAPI backend** ("Week 3")
-> with its own engine and AI path. You do **not** run it for the integrated app — it is kept for
+> with its own engine and AI path. You do **not** run it for the integrated app - it is kept for
 > reference and for the preprocessing/engine CLIs.
 > See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#6-the-two-backends).
 
@@ -73,17 +73,17 @@ The platform lets an engineer:
 Three services must run at once. Full details in [docs/SETUP_AND_RUN.md](docs/SETUP_AND_RUN.md).
 
 ```powershell
-# Terminal 1 — Main backend (port 8000)
+# Terminal 1 - Main backend (port 8000)
 cd "space-weaver-main"
 $env:BACKEND_HOST="127.0.0.1"; $env:BACKEND_PORT="8000"
 python backend.py
 
-# Terminal 2 — MG2 AI server (port 8001)
+# Terminal 2 - MG2 AI server (port 8001)
 cd "MG2_NOK_Correction_System_fixed"
 venv_mg2\Scripts\activate
 python mg2_api_server.py
 
-# Terminal 3 — Frontend (port 5173)
+# Terminal 3 - Frontend (port 5173)
 cd "space-weaver-main"
 npm install          # first time only
 npm run dev -- --port 5173 --strictPort
@@ -100,7 +100,7 @@ Then open **http://localhost:5173/**.
 
 ### Prerequisites
 
-- **Python 3.10** (verified) — global install has all packages; `venv_mg2` is the MG2 virtualenv.
+- **Python 3.10** (verified) - global install has all packages; `venv_mg2` is the MG2 virtualenv.
 - **Node.js 18+** (v26 verified) and **npm**.
 - LLM API credentials in the MG2 `.env` (Capgemini Generative Engine keys are already present).
 
@@ -108,7 +108,7 @@ Then open **http://localhost:5173/**.
 
 ## 3. End-to-end workflow
 
-1. **Load a zone** — pick a predefined Peugeot 3008 zone (or load a custom STL folder + JSON).
+1. **Load a zone** - pick a predefined vehicle zone (or load a custom STL folder + JSON).
 2. **Search / select a study part** in that zone.
 3. Adjust **expansion params** (Per % / MinDis / MaxDis) → neighbours are detected automatically.
 4. Select which **neighbours** to analyze, and tag each part `Fixed` / `Moving` / `Connected`.
@@ -129,21 +129,22 @@ Then open **http://localhost:5173/**.
 
 | Document | What's inside |
 |----------|---------------|
+| [docs/DEMO.md](docs/DEMO.md) | Visual walkthrough - screenshots of every step + the image sent to the AI |
 | [docs/PROJECT_REPORT.md](docs/PROJECT_REPORT.md) | The project explained in detail + the rationale for every technology choice |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Full system architecture, data flow, the two backends, AI providers |
 | [docs/SETUP_AND_RUN.md](docs/SETUP_AND_RUN.md) | Prerequisites, install, environment variables, running all services, verification |
 | [docs/API_REFERENCE.md](docs/API_REFERENCE.md) | Every endpoint of the backend (8000) and MG2 (8001), with request/response shapes |
 | [docs/FRONTEND.md](docs/FRONTEND.md) | Frontend structure, components, 3D viewer, `api.ts`, state & workflow |
 | [docs/DATA_AND_PREPROCESSING.md](docs/DATA_AND_PREPROCESSING.md) | Zone JSON schema, the CAD→JSON preprocessor, engine.py, data availability |
-| [docs/CLEARANCE_RULES.md](docs/CLEARANCE_RULES.md) | Packaging clearance rules — SCR structural rules, CCP circuit rules, verdict thresholds |
+| [docs/CLEARANCE_RULES.md](docs/CLEARANCE_RULES.md) | Packaging clearance rules - SCR structural rules, CCP circuit rules, verdict thresholds |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Port conflicts, blank page, CORS, empty STL zones, LLM/API key issues |
 
 ### Legacy / integration notes (pre-existing)
 
-- [QUICK_START.md](QUICK_START.md) — original 5-minute integration guide
-- [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md) — original MG2↔space-weaver integration guide
-- [INTEGRATION_SUMMARY.md](INTEGRATION_SUMMARY.md) — integration completion summary
-- Capgemini image-generation API setup — see `CAPGEMINI_SETUP_GUIDE.md` in the private application repo
+- [QUICK_START.md](QUICK_START.md) - original 5-minute integration guide
+- [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md) - original MG2↔space-weaver integration guide
+- [INTEGRATION_SUMMARY.md](INTEGRATION_SUMMARY.md) - integration completion summary
+- Capgemini image-generation API setup - see `CAPGEMINI_SETUP_GUIDE.md` in the private application repo
 
 ---
 

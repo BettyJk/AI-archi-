@@ -87,7 +87,7 @@ python mg2_api_server.py
 Expected output:
 ```
 ╔══════════════════════════════════════════════════════════════════╗
-║   MG2 NOK Correction System — FastAPI Server                   ║
+║   MG2 NOK Correction System - FastAPI Server                   ║
 ║   Starting on 0.0.0.0:8001                                      ║
 ╚══════════════════════════════════════════════════════════════════╝
 
@@ -106,7 +106,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8001
    - Navigate to http://localhost:5173 (or 3000)
 
 3. **Perform Clearance Analysis:**
-   - Load a zone (e.g., Peugeot 3008)
+   - Load a zone
    - Select a study part
    - Select neighbouring parts
    - Click "3D-ENV" to open viewer
@@ -250,7 +250,7 @@ MG2_PORT=8002 python mg2_api_server.py
 The MG2 server accepts requests from:
 - `http://localhost:3000`
 - `http://localhost:5173`
-- `*` (all origins) — can be restricted in production
+- `*` (all origins) - can be restricted in production
 
 ### Image Capture Fails
 

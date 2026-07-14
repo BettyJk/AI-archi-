@@ -1,4 +1,15 @@
 # ─────────────────────────────────────────────────────────────
+# DOCS-ONLY REPOSITORY.
+# The application source is kept private and must never be pushed
+# here. Exclude the whole source tree + local build artifacts.
+# ─────────────────────────────────────────────────────────────
+space-weaver-main/
+MG2_NOK_Correction_System_fixed/
+peugeot_preprocessor2/
+output/
+report/
+
+# ─────────────────────────────────────────────────────────────
 # SECRETS — never commit. Both .env files contain live API keys.
 # ─────────────────────────────────────────────────────────────
 .env

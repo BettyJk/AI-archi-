@@ -2,14 +2,14 @@
 
 Two FastAPI services expose HTTP JSON APIs. All examples assume `localhost`.
 
-- **Main backend** — `http://127.0.0.1:8000` — `space-weaver-main/backend.py`
-- **MG2 AI server** — `http://127.0.0.1:8001` — `MG2_NOK_Correction_System_fixed/mg2_api_server.py`
+- **Main backend** - `http://127.0.0.1:8000` - `space-weaver-main/backend.py`
+- **MG2 AI server** - `http://127.0.0.1:8001` - `MG2_NOK_Correction_System_fixed/mg2_api_server.py`
 
 CORS on both allows `localhost`/`127.0.0.1` on ports 3000, 5173, 8080 (+ a few more on MG2).
 
 ---
 
-## Part 1 — Main backend (port 8000)
+## Part 1 - Main backend (port 8000)
 
 ### `GET /health`
 Health check. → `{ "status": "ok", "service": "space-weaver Backend", "timestamp": "<iso>" }`
@@ -91,7 +91,7 @@ Proxies to `POST http://{MG2_HOST}:{MG2_PORT}/analyze-batch` (`api_type:"capgemi
 
 ---
 
-## Part 2 — MG2 AI server (port 8001)
+## Part 2 - MG2 AI server (port 8001)
 
 ### `GET /health`
 → `{ "status":"ok", "service":"MG2 NOK Correction System", "timestamp":"<iso>" }`
@@ -99,7 +99,7 @@ Proxies to `POST http://{MG2_HOST}:{MG2_PORT}/analyze-batch` (`api_type:"capgemi
 ### `GET /reports/{path}`
 Serves generated report files from `output/` (`FileResponse`, 404 if missing).
 
-### `POST /analyze`  — single image
+### `POST /analyze`  - single image
 Request (`AnalysisRequest`):
 ```json
 { "study_part":"PartA", "neighbour_part":"PartB", "image_base64":"<png b64>",
@@ -118,7 +118,7 @@ Response (`AnalysisResponse`):
 `verdict` ∈ `CLASH | NOK | WARNING | OK | ERROR | UNKNOWN`.
 Pipeline: base64 → temp PNG (structured filename) → `classify_images` → `analyse_nok_images(api_type="capgemini")` → `generate_html_report`.
 
-### `POST /analyze-batch`  — many images
+### `POST /analyze-batch`  - many images
 Request (`BatchAnalysisRequest`):
 ```json
 { "images":[ { "study_part":"A","neighbour_part":"B","image_base64":"...",
@@ -131,12 +131,12 @@ Response (`BatchAnalysisResponse`):
 { "analysis_id":"20260712_143000", "timestamp":"<iso>", "total_images":2,
   "results":[ <AnalysisResponse>, ... ], "report_url":"..." }
 ```
-> `api_type` is **ignored** — the server always uses Capgemini. `include_ok:false` skips OK images.
+> `api_type` is **ignored** - the server always uses Capgemini. `include_ok:false` skips OK images.
 
-### `POST /analyze-file`  — multipart upload
+### `POST /analyze-file`  - multipart upload
 Form field `file` (an image). Reads `AI_API` env (default `anthropic`). → `AnalysisResponse` (HTTP 500 on error).
 
-### `POST /generate-final-report`  — validated engineering report
+### `POST /generate-final-report`  - validated engineering report
 Request (`FinalReportRequest`):
 ```json
 { "study_part":"A", "study_part_type":"Moving", "zone":"Electrical_Suspension",
@@ -152,9 +152,9 @@ approved corrective scenarios).
 
 Written to `MG2_NOK_Correction_System_fixed/output/` and served under `:8001/reports/`:
 
-- `NOK_Report_<timestamp>.html` — full analysis dashboard
-- `NOK_Results_<timestamp>.json` — raw results dump
-- `Final_Report_<timestamp>.html` — validated engineering report
+- `NOK_Report_<timestamp>.html` - full analysis dashboard
+- `NOK_Results_<timestamp>.json` - raw results dump
+- `Final_Report_<timestamp>.html` - validated engineering report
 
 ## curl examples
 

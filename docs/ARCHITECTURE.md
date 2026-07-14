@@ -40,11 +40,11 @@ key design details engineers need to know.
 | Frontend (Vite) | **8080** (config) → **use 5173** | `::` (IPv6, dual-stack) | 8080 collides with EnterpriseDB `httpd` on this machine; run on 5173 |
 | Main backend `backend.py` | **8000** | `0.0.0.0` (`BACKEND_HOST`) | Env: `BACKEND_PORT`, `DEBUG` |
 | MG2 server `mg2_api_server.py` | **8001** | `0.0.0.0` (`MG2_HOST`) | Env: `MG2_PORT`, `DEBUG`, `AI_API` |
-| (legacy) `peugeot_preprocessor2/main.py` | 8000 (uvicorn default) | — | Not used by the integrated app |
+| (legacy) `peugeot_preprocessor2/main.py` | 8000 (uvicorn default) | - | Not used by the integrated app |
 
 ## 3. Data flow: computing a clearance
 
-1. On startup, `backend.py` runs `auto_load_predefined_zones()` — it scans
+1. On startup, `backend.py` runs `auto_load_predefined_zones()` - it scans
    `peugeot_preprocessor2/data/*.json`, maps each JSON file to its STL subfolder, injects
    `zone` / `folder_label` / `folder_key` into every part, and stores them in the in-memory
    global `MOCK_ZONES`. (Despite the name, this is **real data**, not mocks.)
@@ -60,7 +60,7 @@ key design details engineers need to know.
    - if boxes overlap, runs `trimesh.proximity.signed_distance` on the closest vertices to detect
      **interference / penetration depth** and the real contact points.
    - Returns results as **NDJSON** (`application/x-ndjson`), one `{"type":"progress", ...}` row
-     per neighbour. (Note: rows are all computed first, then streamed — the stream reports
+     per neighbour. (Note: rows are all computed first, then streamed - the stream reports
      progress but does not compute incrementally.)
 5. `POST /clearance/refine-penetration` re-runs the signed-distance step at higher fidelity
    (20 closest vertices per side) for a single interfering pair.
@@ -72,7 +72,7 @@ See [API_REFERENCE.md](API_REFERENCE.md) for exact request/response shapes and
 
 There are **two** AI paths, both ending at the MG2 server:
 
-**A. Single-image (the "Analyze" button)** — frontend → MG2 directly:
+**A. Single-image (the "Analyze" button)** - frontend → MG2 directly:
 1. `Viewer3D.captureSegmentAI(neighbour, 2400, 1600)` renders a 4-panel composite image
    (two perpendicular gap views, an along-axis cross-section, and a context view) with a
    green CAD-style dimension line and header/footer bars.
@@ -83,7 +83,7 @@ There are **two** AI paths, both ending at the MG2 server:
 4. Response includes `verdict`, an `analysis` object (visual observations, failure mode, 3
    corrective scenarios), and a `report_url`.
 
-**B. Batch (the "Analyze Selected" button)** — can go through either the backend proxy or MG2:
+**B. Batch (the "Analyze Selected" button)** - can go through either the backend proxy or MG2:
 - Frontend `analyzeClearanceBatch()` → `POST :8001/analyze-batch`, **or**
 - Backend `POST :8000/ai-analysis` proxies to `POST :8001/analyze-batch`
   (`{images, api_type:"capgemini", include_ok:false}`, 180 s timeout).
@@ -97,8 +97,8 @@ There are **two** AI paths, both ending at the MG2 server:
 
 | Where | SDK | Provider | Model | Env var |
 |-------|-----|----------|-------|---------|
-| MG2 `ai_analyst.py` (Capgemini path — used by the server) | `openai` | Capgemini Generative Engine | `us.anthropic.claude-sonnet-4-5-20250929-v1:0` | `GENERATIVE_ENGINE_API_KEY`, `GENERATIVE_ENGINE_BASE_URL` |
-| MG2 `ai_analyst.py` (Anthropic path — CLI only) | `anthropic` | Anthropic | `claude-opus-4-5` | `ANTHROPIC_API_KEY` |
+| MG2 `ai_analyst.py` (Capgemini path - used by the server) | `openai` | Capgemini Generative Engine | `us.anthropic.claude-sonnet-4-5-20250929-v1:0` | `GENERATIVE_ENGINE_API_KEY`, `GENERATIVE_ENGINE_BASE_URL` |
+| MG2 `ai_analyst.py` (Anthropic path - CLI only) | `anthropic` | Anthropic | `claude-opus-4-5` | `ANTHROPIC_API_KEY` |
 | MG2 `image_generator.py` (correction visuals) | `requests` | Capgemini **Assets** API | `gemini-2.5-flash-image` | `CAPGEMINI_ASSETS_API_KEY` |
 | Preprocessor `Ai analyst.py` | `openai` | Capgemini Generative Engine | `openai.gpt-4o` | `LLM_OPENAI_KEY` |
 | Preprocessor `main.py` `call_claude_ai` | `anthropic` | Anthropic | `claude-sonnet-4-20250514` | `ANTHROPIC_API_KEY` |
@@ -110,7 +110,7 @@ two **different** Capgemini services with different keys and base URLs.
 
 The repository contains two independent FastAPI backends. Only the first is part of the running app.
 
-### `space-weaver-main/backend.py` — the one you run (port 8000)
+### `space-weaver-main/backend.py` - the one you run (port 8000)
 - The integrated app's data + clearance backend, called by the frontend's `api.ts`.
 - Loads the 7 predefined zones from `peugeot_preprocessor2/data` + `stl_files` on startup.
 - Endpoints: `/zones`, `/zones/{zone}/parts`, `/clearance` (NDJSON), `/clearance/refine-penetration`,
@@ -118,27 +118,27 @@ The repository contains two independent FastAPI backends. Only the first is part
   `/browse/*` (native tkinter pickers), `/ai-analysis` (proxy to MG2), `/health`.
 - In-memory only: zones added via `/load-zone` are lost on restart; the 7 predefined ones reload.
 
-### `peugeot_preprocessor2/main.py` — legacy standalone ("Week 3")
+### `peugeot_preprocessor2/main.py` - legacy standalone ("Week 3")
 - A **separate** FastAPI backend with its own embedded clearance engine and AI path
   (`call_claude_ai` → Anthropic `claude-sonnet-4-20250514`), analysis history persisted to
   `history/`, endpoints like `/analyse/by-name`, `/analyse/upload`, `/parts/search`, `/history`.
 - Not wired to the frontend; kept for reference. Its sibling CLIs are the useful parts:
-  - `engine.py` — standalone clearance computation for one STL.
-  - `Ai analyst.py` — standalone LLM analysis of an engine output file.
-  - `stl_files/peugeot_preprocessor/preprocess.py` — the actual **CAD→JSON** tool that generated
+  - `engine.py` - standalone clearance computation for one STL.
+  - `Ai analyst.py` - standalone LLM analysis of an engine output file.
+  - `stl_files/peugeot_preprocessor/preprocess.py` - the actual **CAD→JSON** tool that generated
     `data/*.json`.
 
 ## 7. Key implementation notes / gotchas
 
-- **In-memory zone store** (`MOCK_ZONES`) — no database; restart reloads only the 7 predefined zones.
-- **Hardcoded fallback paths** — `backend.py` falls back to
+- **In-memory zone store** (`MOCK_ZONES`) - no database; restart reloads only the 7 predefined zones.
+- **Hardcoded fallback paths** - `backend.py` falls back to
   `C:\Users\jbouthay\Downloads\pfe implantation\peugeot_preprocessor\...` if the relative
   `peugeot_preprocessor2` folders are missing. Machine-specific; flag when relocating.
-- **Rules live in code, not `packaging_rules.json`** — the classifier's `CLEARANCE_RULES` and the
+- **Rules live in code, not `packaging_rules.json`** - the classifier's `CLEARANCE_RULES` and the
   LLM system prompt in `ai_analyst.py` are the operative thresholds. `packaging_rules.json` in the
   preprocessor is an authoritative **reference spec** but is not imported by any code. See
   [CLEARANCE_RULES.md](CLEARANCE_RULES.md).
-- **Picker endpoints return HTTP 204 as an error** on cancel (`/browse/*`) — unusual but intentional.
+- **Picker endpoints return HTTP 204 as an error** on cancel (`/browse/*`) - unusual but intentional.
 - **Report artifacts** are written to `MG2_NOK_Correction_System_fixed/output/` and served at
   `:8001/reports/<file>`.
 </content>

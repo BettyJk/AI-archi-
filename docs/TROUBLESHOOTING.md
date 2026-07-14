@@ -13,7 +13,7 @@ Common issues, root causes, and fixes. Most are environment/port related.
 **IPv4 first** and hits the EDB "Server is up and running" page (which references `edblogo.png`),
 not the Vite app.
 
-**Fix — run the frontend on 5173** (free, and already in both backends' CORS allow-list):
+**Fix - run the frontend on 5173** (free, and already in both backends' CORS allow-list):
 
 ```powershell
 cd "space-weaver-main"
@@ -21,8 +21,8 @@ npm run dev -- --port 5173 --strictPort
 # then open http://localhost:5173/  (hard-refresh; don't reuse the :8080 tab)
 ```
 
-Verify you're hitting Vite, not EDB — the served HTML title must be
-`Packaging Analysis — MG2 Engineering`:
+Verify you're hitting Vite, not EDB - the served HTML title must be
+`Packaging Analysis - MG2 Engineering`:
 
 ```powershell
 (Invoke-WebRequest http://localhost:5173/ -UseBasicParsing).Content.Substring(0,300)
@@ -34,10 +34,10 @@ Diagnose port ownership (two rows on 8080 = the conflict):
 Get-NetTCPConnection -LocalPort 8080 -State Listen |
   ForEach-Object { "{0} PID {1} {2}" -f $_.LocalAddress,$_.OwningProcess,(Get-Process -Id $_.OwningProcess).ProcessName }
 # expect:  ::       node   (Vite)
-#          0.0.0.0  httpd  (EnterpriseDB — leave it alone)
+#          0.0.0.0  httpd  (EnterpriseDB - leave it alone)
 ```
 
-Do **not** stop the EDB `httpd`/`postgres` services — they are unrelated database services.
+Do **not** stop the EDB `httpd`/`postgres` services - they are unrelated database services.
 
 ## Port already in use
 
@@ -83,7 +83,7 @@ custom-zone loader are lost on restart. Re-load them, or add them to
   `GENERATIVE_ENGINE_BASE_URL`). These keys are present in
   `MG2_NOK_Correction_System_fixed/.env`. If analysis fails, verify they're valid and reachable.
 - `ANTHROPIC_API_KEY` is only needed for the MG2 **CLI** `main.py --api anthropic`, not the app.
-- Image generation (`image_generator.py`) needs `CAPGEMINI_ASSETS_API_KEY` (Assets API — a
+- Image generation (`image_generator.py`) needs `CAPGEMINI_ASSETS_API_KEY` (Assets API - a
   different service). Not required for the core Analyze flow.
 
 ## `peugeot_preprocessor2/venv2` is broken
